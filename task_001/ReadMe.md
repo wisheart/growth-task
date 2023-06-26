@@ -41,4 +41,4 @@
 
 # 绘图示例
 
-![](./src/img/sample.jpg)
+![](./demo/img/sample.jpg)
