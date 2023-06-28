@@ -4,3 +4,5 @@
 # 基础知识
 
 [Task_001 Python和Git基础](./task_001/ReadMe.md)
+
+[Task_002 PyQT和Fork](./task_002/ReadMe.md)
