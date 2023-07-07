@@ -1,49 +1,62 @@
+from demo import Ui_Form
+
 import sys
-import demo
-import os
-
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtWidgets import QFileDialog
-from demo import Ui_MainWindow
+from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
+from PyQt5.QtGui import QPixmap
+import cv2
+import os
+import qimage2ndarray
 
 
-class MyMainWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
-        self.media_player = QMediaPlayer(self)
+class VideoShow(QWidget, Ui_Form):
+    def __init__(self, parent=None):
+        super(VideoShow, self).__init__(parent)
+        self.setupUi(self)
         self.timer_video = QtCore.QTimer()
         self.init()
 
     def init(self):
-        self.ui.pushButton_2.clicked.connect(self.stop)
-        self.ui.pushButton.clicked.connect(self.start)
-        self.ui.pushButton_3.clicked.connect(self.selectFile)
-    def selectFile(self):
-        # print("select")
+        self.pushButton.clicked.connect(self.btn_start_clicked)
+        self.pushButton_2.clicked.connect(self.btn_stop_clicked)
+        self.pushButton_3.clicked.connect(self.btn_select_clicked)
+
+    def btn_select_clicked(self):
         self.cwd = os.getcwd()
-        # file_dialog = QFileDialog()
-        file_path, _ = QFileDialog.getOpenFileName(self, "选择视频文件", self.cwd, "视频文件 (*.mp4 *.avi)")
-        if file_path:
-            print("选择的文件路径：", file_path)
-            self.start(file_path)
+        self.videoName, _ = QFileDialog.getOpenFileName(self, '选择视频文件', self.cwd, "Video files(*.mp4 , *.avi)")
+        self.cap = cv2.VideoCapture(self.videoName)
+        self.fps = self.cap.get(cv2.CAP_PROP_FPS)
+        self.btn_start_clicked()
 
-    def stop(self):
-        self.media_player.pause()
 
-    def start(self, file_path):
-        media = QMediaContent(QUrl.fromLocalFile(file_path))
-        self.media_player.setMedia(media)
-        self.media_player.play()
+    def btn_start_clicked(self):
+        self.timer_video.start(int(1000 / self.fps))
+        self.timer_video.timeout.connect(self.show_video)
+
+
+    def btn_stop_clicked(self):
+        self.timer_video.stop()
+
+    def show_video(self):
+        ret, img = self.cap.read()
+        self.img = cv2.resize(img, (640, 480), interpolation=cv2.INTER_CUBIC)
+        self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2RGB)
+        qimg = qimage2ndarray.array2qimage(self.img)
+        self.label_video.setPixmap(QPixmap(qimg))
+        self.label_video.show()
+
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self, '退出', "是否要退出该界面？", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            self.close()
+            event.accept()
+        else:
+            event.ignore()
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-
-    mainWindow = MyMainWindow()
-    mainWindow.show()
-
+    ui = VideoShow()
+    ui.show()
     sys.exit(app.exec_())
+
