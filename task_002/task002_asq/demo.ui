@@ -14,20 +14,10 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QOpenGLWidget" name="openGLWidget">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>30</y>
-      <width>711</width>
-      <height>361</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>590</x>
       <y>440</y>
       <width>93</width>
       <height>28</height>
@@ -37,24 +27,52 @@
      <string>暂停</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>300</x>
       <y>440</y>
       <width>195</width>
       <height>30</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>开始播放</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <layout class="QHBoxLayout" name="horizontalLayout"/>
+   </widget>
+   <widget class="QWidget" name="videowidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>59</x>
+      <y>29</y>
+      <width>691</width>
+      <height>351</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>440</y>
+      <width>193</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>开始播放</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>440</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>选择文件</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -70,38 +88,8 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>openGLWidget</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>279</x>
-     <y>479</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>284</x>
-     <y>297</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_2</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>openGLWidget</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>483</x>
-     <y>476</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>487</x>
-     <y>324</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
+ <slots>
+  <slot>selectFile()</slot>
+ </slots>
 </ui>
