@@ -28,8 +28,4 @@
 
 
 # 效果视频
-<center>
-   <video width="369" height="640" controls autoplay>
-      <source src="./demo/video/dance.mp4" type="video/mp4">
-   </video>
-</center>
+demo->video->dance.mp4
