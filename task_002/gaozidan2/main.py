@@ -1,4 +1,4 @@
-from video import Ui_Form
+from  avideo import Ui_Form
 
 import sys
 from PyQt5.QtWidgets import *
@@ -39,14 +39,14 @@ class VideoShow(QWidget, Ui_Form):
 
     def show_video(self):
         ret, img = self.cap.read()
-        self.img = cv2.resize(img, (640, 480), interpolation=cv2.INTER_CUBIC)
+        self.img = cv2.resize(img, (1068, 623), interpolation=cv2.INTER_CUBIC)
         self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2RGB)
         qimg = qimage2ndarray.array2qimage(self.img)
         self.label_video.setPixmap(QPixmap(qimg))
         self.label_video.show()
 
     def closeEvent(self, event):
-        reply = QMessageBox.question(self, '退出', "是否要退出该界面？", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        reply = QMessageBox.question(self, '退出', "退出该界面？", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
             self.close()
             event.accept()
@@ -59,5 +59,3 @@ if __name__ == '__main__':
     ui = VideoShow()
     ui.show()
     sys.exit(app.exec_())
-
- 
