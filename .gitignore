@@ -1,3 +1,4 @@
 ﻿.idea
 task_002/demo/__pycache__
 task_002/task002_asq/__pycache__
+*.pyc
