@@ -7,7 +7,7 @@ cap = cv2.VideoCapture("D:\CNTV\Download\dance.mp4")
 # Create a VideoWriter object to save the output video
 frame_width = int(cap.get(3))
 frame_height = int(cap.get(4))
-out = cv2.VideoWriter('combined_detection.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (frame_width, frame_height))
+out = cv2.VideoWriter('combined_detection.mp4', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (frame_width, frame_height))
 
 # MediaPipe hands detection
 mp_hands = mp.solutions.hands.Hands(static_image_mode=False,
