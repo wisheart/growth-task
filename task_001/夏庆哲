@@ -1,0 +1,46 @@
+import turtle as t
+# 确定主体大小
+t.penup()
+t.goto(0,-200)
+t.pendown()
+t.color('red')
+t.begin_fill()
+t.circle(200)
+t.end_fill()
+# 往内加白色
+t.penup()
+t.goto(0,-160)
+t.pendown()
+t.color('white')
+t.begin_fill()
+t.circle(160)
+t.end_fill()
+# 内加红色形成第一圈
+t.penup()
+t.goto(0,-120)
+t.pendown()
+t.color('red')
+t.begin_fill()
+t.circle(120)
+t.end_fill()
+# 内加蓝
+t.penup()
+t.goto(0,-80)
+t.pendown()
+t.color('blue')
+t.begin_fill()
+t.circle(80)
+t.end_fill()
+# 五角星
+# tan 36=0.7265,sin18=0.309,cos36=0.809,长64.72，短长20
+t.penup()
+t.goto(-68,27.49)
+t.color('white')
+t.begin_fill()
+for i in range(5):
+    t.forward(140)
+    t.right(144)
+t.end_fill()
+t.hideturtle()
+t.exitonclick()
+
